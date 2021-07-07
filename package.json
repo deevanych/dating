@@ -10,10 +10,12 @@
   "dependencies": {
     "@mdi/font": "5.9.55",
     "core-js": "^3.6.5",
+    "lottie-web": "^5.7.11",
     "register-service-worker": "^1.7.1",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
+    "vue-i18n": "^8.24.5",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
