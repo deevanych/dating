@@ -159,12 +159,12 @@ export default class FooterComponent extends Vue {
         &-title {
           font-size: 0.75rem;
           line-height: 0.75rem;
-          font-weight: 500;
         }
 
         &:hover,
         &_active {
           color: var(--v-pink-base);
+          font-weight: 600;
         }
       }
     }

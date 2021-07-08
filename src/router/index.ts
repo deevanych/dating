@@ -4,29 +4,36 @@ import Home from '@/views/Home.vue';
 import Matches from '@/views/Matches.vue';
 import Inbox from '@/views/Inbox.vue';
 import Settings from '@/views/Settings.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/matches',
-    name: 'Matches',
-    component: Matches,
-  },
-  {
-    path: '/inbox',
-    name: 'Inbox',
-    component: Inbox,
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: Settings,
+    component: MainLayout,
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: '/matches',
+        name: 'Matches',
+        component: Matches,
+      },
+      {
+        path: '/inbox',
+        name: 'Inbox',
+        component: Inbox,
+      },
+      {
+        path: '/settings',
+        name: 'Settings',
+        component: Settings,
+      },
+    ],
   },
 ];
 

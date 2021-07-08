@@ -1,16 +1,23 @@
 <template>
-  <div class="home-page">
-    <v-container>
-      sad
-    </v-container>
-  </div>
+  <discover-component/>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import DiscoverComponent from '@/components/DiscoverComponent.vue';
 
-@Component
+@Component({
+  components: {
+    DiscoverComponent,
+  },
+})
 export default class Home extends Vue {
 
 }
 </script>
+
+<style lang="scss">
+  .home-page {
+    padding: 1.625rem 0 2.25rem;
+  }
+</style>

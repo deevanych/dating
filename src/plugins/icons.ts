@@ -1,12 +1,14 @@
-import FooterHomeIcon from '@/icons/FooterHomeIcon.vue';
+import HomeIcon from '@/icons/HomeIcon.vue';
 import MessageIcon from '@/icons/MessageIcon.vue';
 import HeartIcon from '@/icons/HeartIcon.vue';
 import FolderIcon from '@/icons/FolderIcon.vue';
+import ChevronLeftIcon from '@/icons/ChevronLeftIcon.vue';
+import FilterIcon from '@/icons/FilterIcon.vue';
 
 const icons = {
   values: {
     footerHome: {
-      component: FooterHomeIcon,
+      component: HomeIcon,
     },
     message: {
       component: MessageIcon,
@@ -16,6 +18,12 @@ const icons = {
     },
     folder: {
       component: FolderIcon,
+    },
+    chevronLeft: {
+      component: ChevronLeftIcon,
+    },
+    filter: {
+      component: FilterIcon,
     },
   },
 };

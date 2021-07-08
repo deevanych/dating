@@ -8,8 +8,16 @@ const light = {
   warning: '#FFC107',
 
   black: '#000000',
-  white: '#FFFFFF',
-  pink: '#EE9CA7',
+  white: {
+    base: '#FFFFFF',
+    darken1: '#F8F8F8',
+    darken2: '#D7D9DD',
+    darken3: '#B2B2B2',
+  },
+  pink: {
+    base: '#EE9CA7',
+    lighten3: '#FFF4F6',
+  },
   green: '#65E700',
 };
 

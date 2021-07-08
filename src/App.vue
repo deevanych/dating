@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <router-view/>
-    <footer-component/>
   </v-app>
 </template>
 
@@ -9,17 +8,19 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import FooterComponent from '@/components/FooterComponent.vue';
-
-@Component({
-  components: {
-    FooterComponent,
-  },
-})
+@Component
 export default class App extends Vue {
 }
 </script>
 
-<style lang="scss">
-
+<style scoped lang="scss">
+::v-deep {
+  .v-application--wrap {
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: block;
+  }
+}
 </style>
