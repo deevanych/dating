@@ -110,10 +110,7 @@ export default class FooterComponent extends Vue {
 
 <style scoped lang="scss">
   .footer {
-    position: fixed;
-    width: 100%;
-    bottom: -1rem;
-    left: 0;
+    margin-bottom: -1rem;
     background-color: var(--v-white-base);
     border: 0.7px solid var(--v-white-darken1);
     border-radius: 20px 20px 15px 15px;

@@ -29,20 +29,13 @@ export default class MainLayout extends Vue {
     display: flex;
     height: 100%;
     overflow: hidden;
+    flex-direction: column;
   }
 
   .container {
     padding: 0 1.5rem;
     display: flex;
     flex-direction: column;
-  }
-
-  .content__wrapper {
-    margin: 10rem auto 7.5rem;
-  }
-
-  .header {
-    position: fixed;
-    top: 0;
+    flex-grow: 1;
   }
 </style>
