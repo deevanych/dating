@@ -20,7 +20,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import SquareButtonComponent from '@/components/@ui/SquareButtonComponent.vue';
 
 @Component({
-  components: { SquareButtonComponent },
+  components: {
+    SquareButtonComponent,
+  },
 })
 export default class HeaderComponent extends Vue {
 
@@ -31,13 +33,11 @@ export default class HeaderComponent extends Vue {
   .header {
     width: 100%;
     background-color: var(--v-white-base);
-    height: 10rem;
 
     &__wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 3rem;
     }
 
     &__data {
