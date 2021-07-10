@@ -1,0 +1,22 @@
+//fade
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+//fadeSlideTop
+.fade-slide-top-enter-active,
+.fade-slide-top-leave-active {
+  transition: 0.5s;
+}
+
+.fade-slide-top-enter,
+.fade-slide-top-leave-to {
+  transform: translateY(30px);
+  opacity: 0;
+}

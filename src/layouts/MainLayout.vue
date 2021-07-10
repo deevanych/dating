@@ -28,6 +28,7 @@ export default class MainLayout extends Vue {
   .page__wrapper {
     display: flex;
     height: 100%;
+    overflow: hidden;
   }
 
   .container {
