@@ -8,9 +8,19 @@
         <h2 class="header__title">Discover</h2>
         <h2 class="header__heading">Los Angeles, CA</h2>
       </div>
-      <square-button-component>
-        <v-icon size="16">$filter</v-icon>
-      </square-button-component>
+      <v-dialog v-model="filterDialog"
+                transition="dialog-bottom-transition"
+                hide-overlay>
+        <template v-slot:activator="{ on, attrs }">
+          <square-button-component
+            v-bind="attrs"
+            v-on="on"
+            @click.native="filterDialog = !filterDialog">
+            <v-icon size="16">$filter</v-icon>
+          </square-button-component>
+        </template>
+        <filter-popup @close="filterDialog = false"/>
+      </v-dialog>
     </v-container>
   </header>
 </template>
@@ -18,18 +28,30 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SquareButtonComponent from '@/components/@ui/SquareButtonComponent.vue';
+import FilterPopup from '@/components/popups/FilterPopup.vue';
+import BottomPopupLayout from '@/components/popups/BottomPopupLayout.vue';
 
 @Component({
   components: {
+    BottomPopupLayout,
+    FilterPopup,
     SquareButtonComponent,
   },
 })
 export default class HeaderComponent extends Vue {
-
+  private filterDialog = true
 }
 </script>
 
 <style scoped lang="scss">
+::v-deep {
+  .v-dialog {
+    margin: 0;
+    margin-top: auto;
+    border-radius: 50px 50px 0 0;
+    box-shadow: -10px 4px 75px rgba(0, 0, 0, 0.35);
+  }
+}
   .header {
     width: 100%;
     background-color: var(--v-white-base);

@@ -28,6 +28,6 @@ export class Profile implements ProfileType {
     this.name = name;
     this.age = age;
     this.status = status;
-    this.photos = [];
+    this.photos = photos;
   }
 }

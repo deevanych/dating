@@ -8,6 +8,8 @@ import DestinationIcon from '@/icons/DestinationIcon.vue';
 import LikeIcon from '@/icons/LikeIcon.vue';
 import DislikeIcon from '@/icons/DislikeIcon.vue';
 import SuperLikeIcon from '@/icons/SuperLikeIcon.vue';
+import CloseIcon from '@/icons/CloseIcon.vue';
+import SaveIcon from '@/icons/SaveIcon.vue';
 
 const icons = {
   values: {
@@ -40,6 +42,12 @@ const icons = {
     },
     superLike: {
       component: SuperLikeIcon,
+    },
+    close: {
+      component: CloseIcon,
+    },
+    save: {
+      component: SaveIcon,
     },
   },
 };

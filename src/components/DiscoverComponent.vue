@@ -80,6 +80,10 @@ export default class DiscoverComponent extends Vue {
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
 
+    &__filter {
+      background-color: var(--v-white-base);
+    }
+
     &__profile {
       transform: scale(0.8);
       opacity: 0;

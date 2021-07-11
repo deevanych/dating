@@ -8,6 +8,7 @@ const en = {
   metrics: {
     miles: '{n} mile | {n} miles',
   },
+  filters: 'Filters',
 };
 
 export default en;
