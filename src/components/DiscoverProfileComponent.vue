@@ -272,7 +272,6 @@ export default class DiscoverProfileComponent extends Vue {
 
       &-wrapper {
         height: 100%;
-        border-radius: 25px 25px 35px 35px;
         position: relative;
       }
     }

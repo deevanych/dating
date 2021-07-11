@@ -50,6 +50,7 @@ export default class PhotosSliderComponent extends Vue {
 .photos-slider {
   &__button {
     width: 25%;
+    cursor: pointer;
   }
 
   &__buttons {
@@ -74,6 +75,8 @@ export default class PhotosSliderComponent extends Vue {
     &-slider {
       width: 100%;
       display: flex;
+      border-radius: 25px 25px 35px 35px;
+      overflow: hidden;
     }
 
     &-list {
