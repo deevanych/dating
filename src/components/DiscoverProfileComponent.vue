@@ -7,10 +7,12 @@
         'discover__profile_dislike': isDislike,
         }">
     <div class="discover__profile-wrapper">
-      <div class="discover__photos">
+      <photos-slider-component class="discover__photos">
         <div class="discover__photo"
-             :style="computedStyle"></div>
-      </div>
+             v-for="(photo, n) in profile.photos"
+             :key="n"
+             :style="{backgroundImage: `url(${photo})`}"></div>
+      </photos-slider-component>
       <div class="discover__gradient-helper"></div>
 
       <transition-group name="fade" mode="out-in">
@@ -69,18 +71,19 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { ProfileType } from '@/models/profile';
+
 import Hammer from 'hammerjs';
 
-@Component
+import PhotosSliderComponent from '@/components/PhotosSliderComponent.vue';
+
+@Component({
+  components: {
+    PhotosSliderComponent,
+  },
+})
 export default class DiscoverProfileComponent extends Vue {
   @Prop({ required: true })
   private readonly profile!: ProfileType
-
-  get computedStyle(): { backgroundImage: string } {
-    return {
-      backgroundImage: `url(${this.profile.avatar})`,
-    };
-  }
 
   private isMoving = false
 
@@ -200,6 +203,7 @@ export default class DiscoverProfileComponent extends Vue {
         display: flex;
         justify-content: center;
         gap: 0.5rem;
+        z-index: 2;
       }
 
       &-action {
@@ -279,15 +283,14 @@ export default class DiscoverProfileComponent extends Vue {
       border-radius: 25px 25px 35px 35px;
       overflow: hidden;
       background-color: var(--v-white-base);
+      display: flex;
     }
 
     &__photo {
-      background-image: url('/img/profiles/img.png');
       height: 100%;
       width: 100%;
       background-size: cover;
       background-position: center;
-      border-radius: 25px 25px 35px 35px;
     }
   }
 </style>

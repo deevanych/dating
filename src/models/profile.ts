@@ -3,7 +3,7 @@ export interface ProfileType {
   name: string,
   age: number,
   status: string,
-  avatar: string,
+  photos: string[],
 }
 
 export class Profile implements ProfileType {
@@ -15,19 +15,19 @@ export class Profile implements ProfileType {
 
   public readonly status!: string
 
-  public readonly avatar!: string
+  public readonly photos!: string[]
 
   constructor(
     id: number,
     name: string,
     age = 50,
     status = 'test',
-    avatar = 'https://placeimg.com/600/300/people',
+    photos: string[] = [],
   ) {
     this.id = id;
     this.name = name;
     this.age = age;
     this.status = status;
-    this.avatar = avatar;
+    this.photos = [];
   }
 }
