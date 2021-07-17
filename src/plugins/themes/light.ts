@@ -14,9 +14,13 @@ const light = {
     darken2: '#D7D9DD',
     darken3: '#B2B2B2',
     darken4: '#D7D7D7',
+    darken5: '#CFCFCF',
+    darken6: '#DFDFDF',
+    darken7: '#F3F3F3',
   },
   pink: {
     base: '#EE9CA7',
+    lighten1: '#FFDDE1',
     lighten3: '#FFF4F6',
   },
   red: '#FF3030',

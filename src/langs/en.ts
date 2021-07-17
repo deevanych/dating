@@ -9,6 +9,13 @@ const en = {
     miles: '{n} mile | {n} miles',
   },
   filters: 'Filters',
+  gender: {
+    gender: 'Gender',
+    male: 'Male',
+    female: 'Female',
+  },
+  other: 'Other',
+  age: 'Age',
 };
 
 export default en;
