@@ -44,10 +44,18 @@ export default class FilterPopup extends Vue {
 </script>
 
 <style scoped lang="scss">
+  .location-input {
+    border-radius: 1rem;
+  }
+
   .filter-section {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &__title {
       font-weight: 600;

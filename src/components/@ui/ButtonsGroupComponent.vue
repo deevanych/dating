@@ -2,6 +2,7 @@
   <v-btn-toggle
     class="buttons-group"
     :value="value"
+    mandatory
   >
     <slot/>
   </v-btn-toggle>

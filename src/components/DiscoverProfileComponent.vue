@@ -233,7 +233,7 @@ export default class DiscoverProfileComponent extends Vue {
 
         &-wrapper {
           position: absolute;
-          top: 1.5rem;
+          bottom: 8.5rem;
           left: 1.875rem;
           color: var(--v-white-base);
           display: flex;

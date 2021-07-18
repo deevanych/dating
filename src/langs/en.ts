@@ -16,6 +16,7 @@ const en = {
   },
   other: 'Other',
   age: 'Age',
+  location: 'Location',
 };
 
 export default en;

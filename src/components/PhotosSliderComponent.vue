@@ -82,18 +82,19 @@ export default class PhotosSliderComponent extends Vue {
     &-list {
       position: absolute;
       width: 100%;
+      border-radius: 25px 25px 35px 35px;
+      overflow: hidden;
     }
 
     &-dots {
-      margin: auto 0 auto auto;
-      border-radius: 10px 0 0 10px;
-      background-color: rgb(#FFF, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 1rem 0.75rem;
+      margin: 0 auto auto;
+      border-radius: 0 0 15px 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(25px);
+      padding: 0.75rem 1.125rem;
       z-index: 1;
       display: flex;
       gap: 1rem;
-      flex-direction: column;
 
       & > li {
         list-style-type: none;

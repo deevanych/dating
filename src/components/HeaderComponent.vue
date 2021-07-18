@@ -9,8 +9,7 @@
         <h2 class="header__heading">Los Angeles, CA</h2>
       </div>
       <v-dialog v-model="filterDialog"
-                transition="dialog-bottom-transition"
-                hide-overlay>
+                transition="dialog-bottom-transition">
         <template v-slot:activator="{ on, attrs }">
           <square-button-component
             v-bind="attrs"

@@ -10,7 +10,7 @@ export default new Vuex.Store({
       max: 73,
     },
     searchFilter: {
-      age: [24, 32],
+      age: [45, 59],
       // 0 - male, 1 - female, 2 - other
       gender: 1,
     },
