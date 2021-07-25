@@ -68,27 +68,6 @@ export default class FooterComponent extends Vue {
       align-items: center;
       position: relative;
 
-      &__blobs {
-        position: absolute;
-        width: 3rem;
-        height: 3rem;
-        top: -0.75rem;
-        left: -0.375rem;
-        color: var(--v-pink-lighten3);
-        transition: left 1s cubic-bezier(0.81, 0.07, 0.17, 0.89),
-                    transform 1s;
-
-        &_transferred {
-          transform: scaleX(1) scaleY(0);
-        }
-
-        ::v-deep {
-          * {
-            fill: var(--v-pink-lighten3);
-          }
-        }
-      }
-
       &__item {
         text-decoration: none;
         color: var(--v-white-darken2);
