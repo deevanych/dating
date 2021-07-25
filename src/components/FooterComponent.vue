@@ -60,7 +60,7 @@ export default class FooterComponent extends Vue {
     background-color: var(--v-white-base);
     border: 0.7px solid var(--v-white-darken1);
     border-radius: 20px 20px 15px 15px;
-    padding: 1.125rem 2.25rem 3rem;
+    padding: 1.125rem 2.25rem 0;
 
     &-menu {
       display: flex;
@@ -76,7 +76,9 @@ export default class FooterComponent extends Vue {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        height: 3rem;
+        padding-bottom: 3rem;
+        height: 6rem;
+        position: relative;
 
         &-title {
           font-size: 0.75rem;
@@ -87,6 +89,28 @@ export default class FooterComponent extends Vue {
         &_active {
           color: var(--v-pink-base);
           font-weight: 600;
+
+          &::before {
+            position: absolute;
+            top: -0.5rem;
+            background-size: cover;
+            content: '';
+            display: block;
+            width: 2.25rem;
+            height: 2.25rem;
+            background-image: url("~@/assets/blob.svg");
+          }
+
+          &::after {
+            position: absolute;
+            bottom: 0.625rem;
+            content: '';
+            display: block;
+            width: 1.75rem;
+            height: 0.625rem;
+            background-color: var(--v-pink-base);
+            border-radius: 13px;
+          }
         }
       }
     }
