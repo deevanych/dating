@@ -38,15 +38,14 @@ import BottomPopupLayout from '@/components/popups/BottomPopupLayout.vue';
   },
 })
 export default class HeaderComponent extends Vue {
-  private filterDialog = true
+  private filterDialog = false
 }
 </script>
 
 <style scoped lang="scss">
 ::v-deep {
   .v-dialog {
-    margin: 0;
-    margin-top: auto;
+    margin: auto 0 0;
     border-radius: 50px 50px 0 0;
     box-shadow: -10px 4px 75px rgba(0, 0, 0, 0.35);
   }
