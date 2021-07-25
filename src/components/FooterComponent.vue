@@ -1,13 +1,8 @@
 <template>
   <footer class="footer">
     <nav class="footer-menu">
-      <div class="footer-menu__blobs"
-           ref="blobs"
-           :class="{'footer-menu__blobs_transferred': isTransferred}"
-           :style="computedStyle"></div>
       <div v-for="link in footerLinks"
-           :key="link.title"
-           @click="transferBlobs">
+           :key="link.title">
         <router-link :to="{ name: link.to }"
                      :ref="link.to"
                      class="footer-menu__item"
@@ -24,8 +19,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import lottie from 'lottie-web';
-import blobs from '@/lottieFiles/blobs.json';
 import { TranslateResult } from 'vue-i18n';
 
 interface FooterLinkType {
@@ -58,53 +51,6 @@ export default class FooterComponent extends Vue {
       to: 'Settings',
     },
   ];
-
-  private blobsOffset = 0
-
-  private isTransferred = false
-
-  private animationDuration = 0.4
-
-  private footerElements!: Vue[]
-
-  private activeElement!: HTMLElement
-
-  get computedStyle(): { [key: string]: string } {
-    if (this.activeElement) {
-      this.footerInit();
-    }
-
-    return {
-      left: `${this.blobsOffset}px`,
-    };
-  }
-
-  public transferBlobs(): void {
-    this.isTransferred = true;
-
-    setTimeout(() => {
-      this.isTransferred = false;
-    }, this.animationDuration * 1000);
-  }
-
-  private footerInit(): void {
-    this.footerElements = this.$refs[this.$route.name as string] as Vue[];
-    this.activeElement = this.footerElements[0].$el as HTMLElement;
-    const blobsElement = this.$refs.blobs as HTMLElement;
-    const offset = (this.activeElement.offsetWidth / 2) - (blobsElement.offsetWidth / 2);
-    this.blobsOffset = this.activeElement.offsetLeft + offset;
-  }
-
-  mounted(): void {
-    this.footerInit();
-    lottie.loadAnimation({
-      container: this.$refs.blobs as Element,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: blobs,
-    });
-  }
 }
 </script>
 
