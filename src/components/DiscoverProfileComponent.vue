@@ -7,7 +7,8 @@
         'discover__profile_dislike': isDislike,
         }">
     <div class="discover__profile-wrapper">
-      <photos-slider-component class="discover__photos">
+      <photos-slider-component class="discover__photos"
+                               @click.native="openProfile">
         <div class="discover__photo"
              v-for="(photo, n) in profile.photos"
              :key="n"
@@ -65,6 +66,11 @@
         </v-btn>
       </div>
     </div>
+    <v-dialog v-model="isProfileShown"
+              transition="dialog-bottom-transition"
+              fullscreen>
+      <user-profile-component @close="isProfileShown = false"/>
+    </v-dialog>
   </div>
 </template>
 
@@ -75,9 +81,11 @@ import { ProfileType } from '@/models/profile';
 import Hammer from 'hammerjs';
 
 import PhotosSliderComponent from '@/components/PhotosSliderComponent.vue';
+import UserProfileComponent from '@/components/UserProfileComponent.vue';
 
 @Component({
   components: {
+    UserProfileComponent,
     PhotosSliderComponent,
   },
 })
@@ -90,6 +98,8 @@ export default class DiscoverProfileComponent extends Vue {
   private isLike = false
 
   private isDislike = false
+
+  private isProfileShown = false
 
   get computedProfileTitle(): string {
     return `${this.profile.name}, ${this.profile.age}`;
@@ -107,6 +117,10 @@ export default class DiscoverProfileComponent extends Vue {
 
     discoverCard.style.transform = transform;
     this.$emit('removeCard');
+  }
+
+  public openProfile(): void {
+    this.isProfileShown = true;
   }
 
   mounted(): void {

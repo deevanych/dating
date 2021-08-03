@@ -10,9 +10,29 @@ import DislikeIcon from '@/icons/DislikeIcon.vue';
 import SuperLikeIcon from '@/icons/SuperLikeIcon.vue';
 import CloseIcon from '@/icons/CloseIcon.vue';
 import SaveIcon from '@/icons/SaveIcon.vue';
+import UnknownTypeIcon from '@/components/interestTypes/UnknownTypeIcon.vue';
+import MusicTypeIcon from '@/components/interestTypes/MusicTypeIcon.vue';
+import ArtTypeIcon from '@/components/interestTypes/ArtTypeIcon.vue';
+import FilmTypeIcon from '@/components/interestTypes/FilmTypeIcon.vue';
+import MoneyTypeIcon from '@/components/interestTypes/MoneyTypeIcon.vue';
 
 const icons = {
   values: {
+    unknownInterest: {
+      component: UnknownTypeIcon,
+    },
+    musicInterest: {
+      component: MusicTypeIcon,
+    },
+    artInterest: {
+      component: ArtTypeIcon,
+    },
+    filmInterest: {
+      component: FilmTypeIcon,
+    },
+    moneyInterest: {
+      component: MoneyTypeIcon,
+    },
     footerHome: {
       component: HomeIcon,
     },

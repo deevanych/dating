@@ -7,7 +7,7 @@ const light = {
   success: '#4CAF50',
   warning: '#FFC107',
 
-  black: '#000000',
+  black: '#000',
   white: {
     base: '#FFFFFF',
     darken1: '#F8F8F8',
@@ -17,6 +17,9 @@ const light = {
     darken5: '#CFCFCF',
     darken6: '#DFDFDF',
     darken7: '#F3F3F3',
+    darken8: '#AAA',
+    darken9: '#BEBEBE',
+    darken10: '#9F9F9F',
   },
   pink: {
     base: '#EE9CA7',

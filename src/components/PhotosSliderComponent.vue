@@ -2,9 +2,9 @@
   <div class="photos-slider__wrapper">
     <div class="photos-slider__buttons">
       <div class="photos-slider__button photos-slider__button_prev"
-           @click="prevSlider">prev</div>
+           @click.stop="prevSlider">prev</div>
       <div class="photos-slider__button photos-slider__button_next"
-           @click="nextSlider">next</div>
+           @click.stop="nextSlider">next</div>
     </div>
     <slick :options="options"
            ref="slick">
