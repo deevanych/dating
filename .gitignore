@@ -2,6 +2,13 @@
 node_modules
 /dist
 
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.phpunit.result.cache
+
 
 # local env files
 .env.local
