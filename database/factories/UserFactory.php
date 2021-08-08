@@ -19,11 +19,17 @@ class UserFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name,
+            'birthday_date' => $this->faker->date,
+            'city' => $this->faker->city,
+            'sex' => $this->faker->boolean,
+            'about' => $this->faker->paragraph(2),
+            'status' => $this->faker->realText,
             'email' => $this->faker->unique()->safeEmail,
+            'is_verified' => $this->faker->boolean,
         ];
     }
 }

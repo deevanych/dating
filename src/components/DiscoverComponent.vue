@@ -7,7 +7,7 @@
           'tinder_nope': tinderNope,
         }">
     <div class="discover__cards">
-      <discover-profile-component v-for="profile in profiles"
+      <discover-profile-component v-for="profile in cards"
                                   :key="profile.id"
                                   :profile="profile"
                                   ref="profileCard"
@@ -20,7 +20,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import DiscoverProfileComponent from '@/components/DiscoverProfileComponent.vue';
 import { ProfileType } from '@/models/profile';
+import { Getter } from 'vuex-class';
 import axios from 'axios';
+import users from '@/api/users';
 
 @Component({
   components: {
@@ -28,6 +30,9 @@ import axios from 'axios';
   },
 })
 export default class DiscoverComponent extends Vue {
+  @Getter('PROFILE_CARDS')
+  private readonly cards!: []
+
   private profiles: ProfileType[] = []
 
   private tinderNope = false
@@ -60,9 +65,9 @@ export default class DiscoverComponent extends Vue {
   }
 
   mounted(): void {
-    axios.get('https://my-json-server.typicode.com/cashalotkzn/json/profiles')
-      .then(({ data }): void => {
-        this.profiles = data;
+    users.get()
+      .then((data) => {
+        this.$store.dispatch('GET_CARD', data);
       })
       .finally(() => {
         this.loaded = true;
