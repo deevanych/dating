@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <v-container class="header__wrapper">
-      <square-button-component>
+      <square-button-component @click.native="$router.go(-1)">
         <v-icon>$chevronLeft</v-icon>
       </square-button-component>
       <div class="header__data">
