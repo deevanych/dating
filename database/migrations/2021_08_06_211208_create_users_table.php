@@ -15,14 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('birthday_date')->nullable();
-            $table->string('city');
-            $table->boolean('sex')->default(true);
-            $table->tinyText('about')->nullable();
-            $table->string('status')->nullable();
-            $table->string('email')->unique();
-            $table->boolean('is_verified')->default(false);
+            $table->string('name')->comment('User`s name');
+            $table->date('birthday_date')->nullable()->comment('User`s bd date');
+            $table->string('city')->comment('User`s city');
+            $table->boolean('sex')->default(true)->comment('User`s sex (1 - male, 0 - female)');
+            $table->tinyText('about')->nullable()->comment('User`s about info');
+            $table->string('status')->nullable()->comment('User`s status');
+            $table->string('email')->unique()->comment('User`s email');
+            $table->boolean('is_verified')->default(false)->comment('User`s verified mark');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@
         <div class="discover__photo"
              v-for="(photo, n) in profile.photos"
              :key="n"
-             :style="{backgroundImage: `url(${photo})`}"></div>
+             :style="{backgroundImage: `url(${photo.url})`}"></div>
       </photos-slider-component>
       <div class="discover__gradient-helper"></div>
 
@@ -69,14 +69,15 @@
     <v-dialog v-model="isProfileShown"
               transition="dialog-bottom-transition"
               fullscreen>
-      <user-profile-component @close="isProfileShown = false"/>
+      <user-profile-component :user="profile"
+                              @close="isProfileShown = false"/>
     </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ProfileType } from '@/models/profile';
+import { UserType } from '@/models/User';
 
 import Hammer from 'hammerjs';
 
@@ -91,7 +92,7 @@ import UserProfileComponent from '@/components/UserProfileComponent.vue';
 })
 export default class DiscoverProfileComponent extends Vue {
   @Prop({ required: true })
-  private readonly profile!: ProfileType
+  private readonly profile!: UserType
 
   private isMoving = false
 

@@ -4,16 +4,16 @@
          @click="$emit('close')">
       <v-icon size="24">$chevronLeft</v-icon>
     </div>
-    <div class="user-profile__wrapper" v-if="isLoaded">
-      <img class="user-profile__image" alt='' :src="profile.photos[0]"/>
+    <div class="user-profile__wrapper">
+      <img class="user-profile__image" alt='' :src="user.photos[0].url"/>
       <div class="user-profile__info">
         <div class="user-profile__header user-profile__section">
           <div>
             <div class="user-profile__title">
-              {{ profile.name }}, {{ profile.age }}
+              {{ user.name }}, {{ user.age }}
             </div>
             <div class="user-profile__status">
-              {{ profile.status }}
+              {{ user.status }}
             </div>
           </div>
           <div class="user-profile__distance">
@@ -27,16 +27,17 @@
             {{ $t('about') }}
           </div>
           <div class="user-profile__section-content">
-            {{ profile.about }}
+            {{ user.about }}
           </div>
         </div>
-        <div class="user-profile__section">
+        <div v-if="user.interests"
+             class="user-profile__section">
           <div class="user-profile__section-title">
             {{ $t('interests') }}
           </div>
           <div class="user-profile__section-content">
             <div class="user-profile__interests">
-              <interest-component v-for="interest in profile.interests"
+              <interest-component v-for="interest in user.interests"
                                   :key="interest.id"
                                   :title="interest.title"
                                   :type="interest.type"/>
@@ -45,20 +46,12 @@
         </div>
       </div>
     </div>
-    <div class="user-profile__skeleton" v-else>
-      <v-skeleton-loader
-        class="mx-auto"
-        max-width="300"
-        type="card"
-      ></v-skeleton-loader>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import axios from 'axios';
-import { ProfileType } from '@/models/profile';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { UserType } from '@/models/User';
 import InterestComponent from '@/components/InterestComponent.vue';
 
 @Component({
@@ -67,17 +60,8 @@ import InterestComponent from '@/components/InterestComponent.vue';
   },
 })
 export default class UserProfileComponent extends Vue {
-  private profile!: ProfileType
-
-  private isLoaded = false
-
-  mounted(): void {
-    axios.get('https://my-json-server.typicode.com/cashalotkzn/json/profiles/1')
-      .then(({ data }): void => {
-        this.isLoaded = true;
-        this.profile = data;
-      });
-  }
+  @Prop({ required: true })
+  private readonly user!: UserType
 }
 </script>
 

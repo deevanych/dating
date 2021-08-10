@@ -1,13 +1,19 @@
 import axiosInstance from '@/plugins/axios';
+import { UserType } from '@/models/User';
+
+const endpoint = 'users';
 
 export default {
-  async get(id: number | null = null): Promise<string> {
-    const url = id ? `users/${id}` : 'users';
+  async index(offset = '', limit = ''): Promise<{ data: UserType[] }> {
+    const url: URLSearchParams = new URLSearchParams();
 
-    return axiosInstance.get(url);
+    if (offset) url.append('offset', offset);
+    if (limit) url.append('limit', limit);
+
+    return axiosInstance.get([endpoint, url.toString()].join('?'));
   },
 
-  post(data = []): void {
-    console.log(data);
+  async show(id: number | null = null): Promise<{ data: UserType }> {
+    return axiosInstance.get([endpoint, id].join('/'));
   },
 };

@@ -15,9 +15,12 @@ class UserController extends Controller
      *
      * @return Collection
      */
-    public function index(): Collection
+    public function index(Request $request): Collection
     {
-        return User::all();
+        $limit = $request->get('limit', 10);
+        $offset = $request->get('offset', 0);
+
+        return User::skip($offset)->take($limit)->get();
     }
 
     /**

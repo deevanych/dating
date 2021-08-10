@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import users from '@/api/users';
+
+const cardsLimit = 5;
+let cardsOffset = 0;
 
 Vue.use(Vuex);
 
@@ -24,10 +28,23 @@ export default new Vuex.Store({
     PROFILE_CARDS: (state) => state.cards,
   },
   mutations: {
-    SET_CARD: (state, cards: []) => state.cards.push(...cards),
+    ADD_CARDS: (state, cards: [] = []): number => state.cards.push(...cards),
+    REMOVE_CARD: (state): void => Vue.delete(state.cards, 0),
   },
   actions: {
-    GET_CARD: (store, cards) => store.commit('SET_CARD', cards.data),
+    GET_CARDS: (store): void => {
+      users.index(cardsOffset.toString(), cardsLimit.toString()).then(({ data }): void => {
+        cardsOffset += cardsLimit;
+        store.commit('ADD_CARDS', data);
+      });
+    },
+    REMOVE_CARD: (store): void => {
+      store.commit('REMOVE_CARD');
+      if (store.getters.PROFILE_CARDS.length <= cardsLimit) {
+        store.dispatch('GET_CARDS')
+          .then();
+      }
+    },
   },
   modules: {
   },

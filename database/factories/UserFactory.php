@@ -22,13 +22,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->firstName,
             'birthday_date' => $this->faker->date,
             'city' => $this->faker->city,
             'sex' => $this->faker->boolean,
             'about' => $this->faker->paragraph(2),
-            'status' => $this->faker->realText,
-            'email' => $this->faker->unique()->safeEmail,
+            'status' => $this->faker->realText(20),
+            'email' => $this->faker->safeEmail,
             'is_verified' => $this->faker->boolean,
         ];
     }

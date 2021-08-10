@@ -1,10 +1,6 @@
-interface InterestType {
-  id: number,
-  title: string,
-  type: string,
-}
+import { InterestType } from '@/models/Interest';
 
-export interface ProfileType {
+export interface UserType {
   id: number,
   name: string,
   age: number,
@@ -14,7 +10,7 @@ export interface ProfileType {
   interests: InterestType[],
 }
 
-export class Profile implements ProfileType {
+export class User implements UserType {
   constructor(
     public readonly id: number,
     public readonly name: string,

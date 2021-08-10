@@ -2,7 +2,7 @@
   <div class="discover"
        ref="tinder"
        :class="{
-          loaded,
+          'loaded': isLoaded,
           'tinder_love': tinderLove,
           'tinder_nope': tinderNope,
         }">
@@ -11,7 +11,7 @@
                                   :key="profile.id"
                                   :profile="profile"
                                   ref="profileCard"
-                                  @removeCard="removeCard"/>
+                                  @removeCard="$store.dispatch('REMOVE_CARD')"/>
     </div>
   </div>
 </template>
@@ -19,10 +19,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import DiscoverProfileComponent from '@/components/DiscoverProfileComponent.vue';
-import { ProfileType } from '@/models/profile';
 import { Getter } from 'vuex-class';
-import axios from 'axios';
-import users from '@/api/users';
 
 @Component({
   components: {
@@ -33,45 +30,16 @@ export default class DiscoverComponent extends Vue {
   @Getter('PROFILE_CARDS')
   private readonly cards!: []
 
-  private profiles: ProfileType[] = []
-
   private tinderNope = false
 
   private tinderLove = false
 
-  private loaded = false
-
-  private readonly chunkCardsCount = 5
-
-  public removeCard(): void {
-    new Promise((resolve) => {
-      setTimeout((): void => {
-        this.$delete(this.profiles, 0);
-        resolve(true);
-      }, 200);
-    }).then((): void => {
-      if (this.profiles.length <= this.chunkCardsCount) this.loadCards();
-    });
-  }
-
-  public loadCards(cardsCount: number = this.chunkCardsCount): void {
-    axios.get('https://my-json-server.typicode.com/cashalotkzn/json/profiles')
-      .then(({ data }): void => {
-        this.profiles.push(...data.slice(0, cardsCount));
-      })
-      .finally((): void => {
-        this.loaded = true;
-      });
-  }
+  private isLoaded = false
 
   mounted(): void {
-    users.get()
-      .then((data) => {
-        this.$store.dispatch('GET_CARD', data);
-      })
-      .finally(() => {
-        this.loaded = true;
-      });
+    this.$store.dispatch('GET_CARDS').then(() => {
+      this.isLoaded = true;
+    });
   }
 }
 </script>
