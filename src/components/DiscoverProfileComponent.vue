@@ -222,6 +222,10 @@ export default class DiscoverProfileComponent extends Vue {
       transition: 0.1s ease-in-out;
       z-index: 97;
 
+      & * {
+        user-select: none;
+      }
+
       &-actions {
         position: absolute;
         bottom: -2.375rem;
