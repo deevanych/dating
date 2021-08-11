@@ -14,20 +14,20 @@
              :key="n"
              :style="{backgroundImage: `url(${photo.url})`}"></div>
       </photos-slider-component>
-      <div class="discover__gradient-helper"></div>
+<!--      <div class="discover__gradient-helper"></div>-->
 
-      <transition-group name="fade" mode="out-in">
-        <div v-if="isLike"
-             key="like"
-             class="discover__gradient-helper discover__gradient-helper_like">
-            <v-icon size="94">$like</v-icon>
-        </div>
-        <div v-if="isDislike"
-             key="dislike"
-             class="discover__gradient-helper discover__gradient-helper_dislike">
-          <v-icon size="94">$dislike</v-icon>
-        </div>
-      </transition-group>
+<!--      <transition-group name="fade" mode="out-in">-->
+<!--        <div v-if="isLike"-->
+<!--             key="like"-->
+<!--             class="discover__gradient-helper discover__gradient-helper_like">-->
+<!--            <v-icon size="94">$like</v-icon>-->
+<!--        </div>-->
+<!--        <div v-if="isDislike"-->
+<!--             key="dislike"-->
+<!--             class="discover__gradient-helper discover__gradient-helper_dislike">-->
+<!--          <v-icon size="94">$dislike</v-icon>-->
+<!--        </div>-->
+<!--      </transition-group>-->
       <div class="discover__profile-distance-wrapper">
         <v-icon size="12"
                 class="discover__profile-distance-icon">$destination</v-icon>
@@ -206,6 +206,10 @@ export default class DiscoverProfileComponent extends Vue {
       position: absolute;
       padding-bottom: 2.75rem;
       cursor: grab;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: 0.1s ease-in-out;
+      z-index: 97;
 
       &-actions {
         position: absolute;
