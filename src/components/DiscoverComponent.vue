@@ -51,7 +51,6 @@ export default class DiscoverComponent extends Vue {
     flex-direction: column;
     position: relative;
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
 
     &__filter {
       background-color: var(--v-white-base);
@@ -60,18 +59,19 @@ export default class DiscoverComponent extends Vue {
     &__profile {
       transform: scale(0.8);
       opacity: 0;
-      z-index: 1;
+      transition: 0.1s ease-in-out;
+      z-index: 97;
 
       &:first-of-type {
         transform: scale(1);
-        z-index: 3;
         opacity: 1;
+        z-index: 99;
       }
 
       &:nth-of-type(2) {
         transform: scale(0.9);
         opacity: 0.8;
-        z-index: 2;
+        z-index: 98;
       }
     }
 

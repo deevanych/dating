@@ -205,10 +205,7 @@ export default class DiscoverProfileComponent extends Vue {
       border-radius: 8px;
       position: absolute;
       padding-bottom: 2.75rem;
-      cursor: -webkit-grab;
-      cursor: -moz-grab;
       cursor: grab;
-      z-index: 99;
 
       &-actions {
         position: absolute;
@@ -217,7 +214,7 @@ export default class DiscoverProfileComponent extends Vue {
         display: flex;
         justify-content: center;
         gap: 0.5rem;
-        z-index: 2;
+        z-index: 100;
       }
 
       &-action {
@@ -227,6 +224,13 @@ export default class DiscoverProfileComponent extends Vue {
         align-items: center;
         justify-content: center;
         box-shadow: 0 20px 45px var(--v-white-darken4) !important;
+
+        ::v-deep {
+          .v-btn__content {
+            transition: initial;
+            transition-property: initial;
+          }
+        }
 
         &_small {
           width: 3.875rem !important;
@@ -278,9 +282,7 @@ export default class DiscoverProfileComponent extends Vue {
       }
 
       &_moving {
-        transition: none;
-        cursor: -webkit-grabbing;
-        cursor: -moz-grabbing;
+        transition: none !important;
         cursor: grabbing;
       }
 
