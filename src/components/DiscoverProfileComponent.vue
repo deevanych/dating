@@ -204,12 +204,11 @@ export default class DiscoverProfileComponent extends Vue {
       width: 100%;
       border-radius: 8px;
       position: absolute;
-      will-change: transform;
-      transition: all 0.3s ease-in-out;
       padding-bottom: 2.75rem;
       cursor: -webkit-grab;
       cursor: -moz-grab;
       cursor: grab;
+      z-index: 99;
 
       &-actions {
         position: absolute;
