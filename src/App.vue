@@ -20,6 +20,7 @@ export default class App extends Vue {
     left: 0;
     right: 0;
     height: 100%;
+    overflow: hidden;
   }
 
   ::v-deep {

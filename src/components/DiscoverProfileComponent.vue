@@ -94,6 +94,8 @@ export default class DiscoverProfileComponent extends Vue {
   @Prop({ required: true })
   private readonly profile!: UserType
 
+  private readonly animationDuration = 300
+
   private isMoving = false
 
   private isLike = false
@@ -106,9 +108,19 @@ export default class DiscoverProfileComponent extends Vue {
     return `${this.profile.name}, ${this.profile.age}`;
   }
 
+  private removeCard(): void {
+    const discoverCard: HTMLElement = this.$refs?.discoverCard as HTMLElement;
+    discoverCard.style.transition = `${this.animationDuration / 1000}s`;
+
+    setTimeout(() => {
+      this.$emit('removeCard');
+    }, this.animationDuration);
+  }
+
   public setVote(like = true): void | boolean {
     const discoverCard: HTMLElement = this.$refs?.discoverCard as HTMLElement;
     const moveOutWidth: number = document.body.clientWidth * 1.5;
+
     let transform = `translate(-${moveOutWidth}px, -100px) rotate(30deg)`;
 
     if (like) {
@@ -117,7 +129,7 @@ export default class DiscoverProfileComponent extends Vue {
     }
 
     discoverCard.style.transform = transform;
-    this.$emit('removeCard');
+    this.removeCard();
   }
 
   public openProfile(): void {
@@ -165,8 +177,7 @@ export default class DiscoverProfileComponent extends Vue {
       const rotate: number = xMulti * yMulti;
 
       discoverCard.style.transform = `translate(${toX}px, ${toY + event.deltaY}px) rotate(${rotate}deg)`;
-      this.$emit('removeCard');
-
+      this.removeCard();
       return true;
     });
   }
