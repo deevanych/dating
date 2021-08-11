@@ -14,21 +14,23 @@ export default class App extends Vue {
 </script>
 
 <style scoped lang="scss">
-::v-deep {
   .v-application {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 100%;
+  }
 
-    &--wrap {
-      flex-direction: column;
-      min-height: 100vh;
-      width: 100%;
-      position: relative;
-      display: block;
+  ::v-deep {
+    .v-application {
+      &--wrap {
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+        display: block;
+      }
     }
   }
-}
 </style>
