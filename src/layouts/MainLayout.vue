@@ -30,6 +30,11 @@ export default class MainLayout extends Vue {
     height: 100%;
     overflow: hidden;
     flex-direction: column;
+    position: absolute;
+    min-height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
   }
 
   .container {
