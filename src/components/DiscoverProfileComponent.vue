@@ -14,7 +14,7 @@
              :key="n"
              :style="{backgroundImage: `url(${photo.url})`}"></div>
       </photos-slider-component>
-<!--      <div class="discover__gradient-helper"></div>-->
+      <div class="discover__gradient-helper"></div>
 
 <!--      <transition-group name="fade" mode="out-in">-->
 <!--        <div v-if="isLike"-->
@@ -142,8 +142,12 @@ export default class DiscoverProfileComponent extends Vue {
 
     hammerTime.on('pan', (event): void => {
       this.isMoving = true;
+
       if (event.deltaX === 0) return;
-      if (event.center.x === 0 && event.center.y === 0) return;
+      if (event.center.x === 0 && event.center.y === 0) {
+        discoverCard.style.transform = '';
+        return;
+      }
 
       const xMulti: number = event.deltaX * 0.03;
       const yMulti: number = event.deltaY / 80;

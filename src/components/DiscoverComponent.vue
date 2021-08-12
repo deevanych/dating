@@ -77,6 +77,7 @@ export default class DiscoverComponent extends Vue {
       justify-content: center;
       align-items: flex-end;
       z-index: 1;
+      touch-event: pan-y;
     }
 
     &.loaded {
