@@ -117,10 +117,10 @@ export default class DiscoverProfileComponent extends Vue {
     const discoverCard: HTMLElement = this.$refs?.discoverCard as HTMLElement;
     const moveOutWidth: number = document.body.clientWidth * 1.5;
 
-    let transform = `translate(-${moveOutWidth}px, -100px) rotate(30deg)`;
+    let transform = `translate(-${moveOutWidth}px, 200px) rotate(-20deg)`;
 
     if (like) {
-      transform = `translate(${moveOutWidth}px, -100px) rotate(-30deg)`;
+      transform = `translate(${moveOutWidth}px, 200px) rotate(20deg)`;
       this.isLike = true;
     }
 
