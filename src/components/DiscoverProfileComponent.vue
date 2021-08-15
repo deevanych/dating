@@ -19,14 +19,10 @@
             'discover__gradient-helper_like': isLike,
             'discover__gradient-helper_dislike': isDislike,
             }">
-        <transition name="fade" mode="out-in">
-          <v-icon v-if="isLike"
-                  key="like"
-                  size="94">$like</v-icon>
-          <v-icon v-if="isDislike"
-                  key="dislike"
-                  size="94">$dislike</v-icon>
-        </transition>
+          <v-icon size="94"
+                  class="discover__icon discover__icon_like">$like</v-icon>
+          <v-icon size="94"
+                  class="discover__icon discover__icon_dislike">$dislike</v-icon>
       </div>
       <div class="discover__profile-distance-wrapper">
         <v-icon size="12"
@@ -202,6 +198,14 @@ export default class DiscoverProfileComponent extends Vue {
   .discover {
     $discover: &;
 
+    &__icon {
+      margin: auto;
+      position: absolute;
+      opacity: 0;
+      transition: 0.3s;
+      will-change: opactiy;
+    }
+
     &__gradient-helper {
       position: absolute;
       top: 0;
@@ -213,13 +217,22 @@ export default class DiscoverProfileComponent extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
+      will-change: background;
 
       &_like {
         background: linear-gradient(transparent, var(--v-pink-base));
+
+        & > #{$discover}__icon_like {
+          opacity: 1;
+        }
       }
 
       &_dislike {
         background: linear-gradient(transparent, var(--v-red-base));
+
+        & > #{$discover}__icon_dislike {
+          opacity: 1;
+        }
       }
     }
 
@@ -237,6 +250,7 @@ export default class DiscoverProfileComponent extends Vue {
       z-index: 97;
       touch-action: none;
       user-select: none;
+      will-change: transform;
 
       & * {
         user-select: none;
