@@ -3,6 +3,7 @@ module.exports = {
     'vuetify',
   ],
   devServer: {
+    port: 8081,
     proxy: {
       '^/api': {
         target: process.env.APP_URL,

@@ -1,7 +1,7 @@
 //fade
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.1s;
 }
 
 .fade-enter,
@@ -12,7 +12,7 @@
 //fadeSlideTop
 .fade-slide-top-enter-active,
 .fade-slide-top-leave-active {
-  transition: 0.5s;
+  transition: 0.1s;
 }
 
 .fade-slide-top-enter,

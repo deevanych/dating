@@ -1,11 +1,7 @@
 <template>
-  <div class="discover"
-       ref="tinder"
-       :class="{
-          'loaded': isLoaded,
-          'tinder_love': tinderLove,
-          'tinder_nope': tinderNope,
-        }">
+  <div v-if="cards.length > 0"
+       class="discover"
+       ref="tinder">
     <div class="discover__cards">
       <discover-profile-component v-for="profile in cards"
                                   :key="profile.id"
@@ -30,16 +26,8 @@ export default class DiscoverComponent extends Vue {
   @Getter('PROFILE_CARDS')
   private readonly cards!: []
 
-  private tinderNope = false
-
-  private tinderLove = false
-
-  private isLoaded = false
-
   mounted(): void {
-    this.$store.dispatch('GET_CARDS').then(() => {
-      this.isLoaded = true;
-    });
+    this.$store.dispatch('GET_CARDS');
   }
 }
 </script>
@@ -50,7 +38,6 @@ export default class DiscoverComponent extends Vue {
     display: flex;
     flex-direction: column;
     position: relative;
-    opacity: 0;
 
     &__filter {
       background-color: var(--v-white-base);
@@ -77,11 +64,6 @@ export default class DiscoverComponent extends Vue {
       justify-content: center;
       align-items: flex-end;
       z-index: 1;
-      touch-event: pan-y;
-    }
-
-    &.loaded {
-      opacity: 1;
     }
 
     &__status {

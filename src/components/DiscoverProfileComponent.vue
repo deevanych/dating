@@ -14,20 +14,20 @@
              :key="n"
              :style="{backgroundImage: `url(${photo.url})`}"></div>
       </photos-slider-component>
-      <div class="discover__gradient-helper"></div>
-
-<!--      <transition-group name="fade" mode="out-in">-->
-<!--        <div v-if="isLike"-->
-<!--             key="like"-->
-<!--             class="discover__gradient-helper discover__gradient-helper_like">-->
-<!--            <v-icon size="94">$like</v-icon>-->
-<!--        </div>-->
-<!--        <div v-if="isDislike"-->
-<!--             key="dislike"-->
-<!--             class="discover__gradient-helper discover__gradient-helper_dislike">-->
-<!--          <v-icon size="94">$dislike</v-icon>-->
-<!--        </div>-->
-<!--      </transition-group>-->
+      <div class="discover__gradient-helper"
+           :class="{
+            'discover__gradient-helper_like': isLike,
+            'discover__gradient-helper_dislike': isDislike,
+            }">
+        <transition name="fade" mode="out-in">
+          <v-icon v-if="isLike"
+                  key="like"
+                  size="94">$like</v-icon>
+          <v-icon v-if="isDislike"
+                  key="dislike"
+                  size="94">$dislike</v-icon>
+        </transition>
+      </div>
       <div class="discover__profile-distance-wrapper">
         <v-icon size="12"
                 class="discover__profile-distance-icon">$destination</v-icon>
@@ -79,7 +79,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { UserType } from '@/models/User';
 
-import Hammer from 'hammerjs';
+import interact from 'interactjs';
 
 import PhotosSliderComponent from '@/components/PhotosSliderComponent.vue';
 import UserProfileComponent from '@/components/UserProfileComponent.vue';
@@ -136,53 +136,63 @@ export default class DiscoverProfileComponent extends Vue {
     this.isProfileShown = true;
   }
 
+  private setMoving(isMoving = true): void {
+    this.isMoving = isMoving;
+  }
+
+  private setLike(like: boolean | null = null): void {
+    switch (like) {
+      case true:
+        this.isLike = true;
+        this.isDislike = false;
+        break;
+
+      case false:
+        this.isLike = false;
+        this.isDislike = true;
+        break;
+
+      default:
+        this.isLike = false;
+        this.isDislike = false;
+    }
+  }
+
   mounted(): void {
     const discoverCard: HTMLElement = this.$refs?.discoverCard as HTMLElement;
-    const hammerTime = new Hammer(discoverCard);
+    const { setMoving, setVote, setLike } = this;
+    const position = { x: 0, y: 0 };
 
-    hammerTime.on('pan', (event): void => {
-      this.isMoving = true;
+    interact(discoverCard).draggable({
+      listeners: {
+        start() {
+          setMoving();
+        },
+        move(event) {
+          position.x += event.dx;
+          position.y += event.dy;
+          setLike(position.x > 0);
+          const xMulti: number = position.x * 0.03;
+          const yMulti: number = position.y / 80;
+          const rotate: number = xMulti * yMulti;
 
-      if (event.deltaX === 0) return;
-      if (event.center.x === 0 && event.center.y === 0) {
-        discoverCard.style.transform = '';
-        return;
-      }
+          discoverCard.style.transform = `translate(${position.x}px, ${position.y}px) rotate(${rotate}deg)`;
+        },
+        end(event) {
+          const keep: boolean = Math.abs(event.velocity.x) < 500;
+          setMoving(false);
 
-      const xMulti: number = event.deltaX * 0.03;
-      const yMulti: number = event.deltaY / 80;
-      const rotate: number = xMulti * yMulti;
+          if (keep) {
+            position.x = 0;
+            position.y = 0;
+            discoverCard.style.transform = '';
+            setLike();
+            return;
+          }
 
-      this.isLike = event.deltaX > 0;
-      this.isDislike = event.deltaX < 0;
-
-      discoverCard.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
-    });
-
-    hammerTime.on('panend', (event): boolean => {
-      const moveOutWidth: number = document.body.clientWidth;
-      const keep: boolean = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
-
-      this.isMoving = false;
-      this.isLike = false;
-      this.isDislike = false;
-
-      if (keep) {
-        discoverCard.style.transform = '';
-        return false;
-      }
-
-      const endX: number = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
-      const toX: number = event.deltaX > 0 ? endX : -endX;
-      const endY: number = Math.abs(event.velocityY) * moveOutWidth;
-      const toY: number = event.deltaY > 0 ? endY : -endY;
-      const xMulti: number = event.deltaX * 0.03;
-      const yMulti: number = event.deltaY / 80;
-      const rotate: number = xMulti * yMulti;
-
-      discoverCard.style.transform = `translate(${toX}px, ${toY + event.deltaY}px) rotate(${rotate}deg)`;
-      this.removeCard();
-      return true;
+          setVote(position.x > 0);
+        },
+      },
     });
   }
 }
@@ -225,6 +235,8 @@ export default class DiscoverProfileComponent extends Vue {
       opacity: 0;
       transition: 0.1s ease-in-out;
       z-index: 97;
+      touch-action: none;
+      user-select: none;
 
       & * {
         user-select: none;
@@ -306,7 +318,6 @@ export default class DiscoverProfileComponent extends Vue {
 
       &_moving {
         transition: none !important;
-        cursor: grabbing;
       }
 
       &-wrapper {
