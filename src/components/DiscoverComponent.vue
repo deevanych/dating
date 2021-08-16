@@ -45,14 +45,10 @@ export default class DiscoverComponent extends Vue {
 
     &__profile {
       &:first-of-type {
-        transform: scale(1);
-        opacity: 1;
         z-index: 99;
       }
 
       &:nth-of-type(2) {
-        transform: scale(0.9);
-        opacity: 0.8;
         z-index: 98;
       }
     }

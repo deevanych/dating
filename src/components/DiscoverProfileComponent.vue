@@ -169,7 +169,7 @@ export default class DiscoverProfileComponent extends Vue {
           discoverCard.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotate}deg)`;
         },
         end(event) {
-          const keep: boolean = Math.abs(event.velocity.x) < 1000;
+          const keep: boolean = Math.abs(event.velocity.x) < 800;
           setMoving(false);
 
           if (keep) {
@@ -230,6 +230,8 @@ export default class DiscoverProfileComponent extends Vue {
     }
 
     &__profile {
+      $profile: &;
+
       height: 100%;
       display: inline-block;
       width: 100%;
@@ -237,8 +239,6 @@ export default class DiscoverProfileComponent extends Vue {
       position: absolute;
       padding-bottom: 2.75rem;
       cursor: grab;
-      transform: scale(0.8);
-      opacity: 0;
       transition: 0.1s ease-in-out;
       z-index: 97;
       touch-action: none;
@@ -260,14 +260,20 @@ export default class DiscoverProfileComponent extends Vue {
       }
 
       &-action {
-        width: 5.375rem !important;
-        height: 5.375rem !important;
+        #{$profile}:first-of-type &,
+        #{$profile}:nth-of-type(2) &, {
+          box-shadow: 0 20px 45px var(--v-white-darken4);
+        }
+
+        width: 5.375rem;
+        height: 5.375rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 20px 45px var(--v-white-darken4) !important;
         border-radius: 50%;
         background: var(--v-white-base);
+        transition: 0.3s;
+        will-change: box-shadow;
 
         &_small {
           width: 3.875rem !important;
