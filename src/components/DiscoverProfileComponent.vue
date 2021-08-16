@@ -34,32 +34,26 @@
         <h4 class="discover__profile-status">{{ profile.status }}</h4>
       </div>
       <div class="discover__profile-actions">
-        <v-btn
-          fab
-          class="discover__profile-action
-          discover__profile-action_dislike
-          discover__profile-action_small"
-          ref="dislike"
-          @click.native="setVote(false)">
-          1
-        </v-btn>
-        <v-btn
-          fab
-          class="discover__profile-action
-          discover__profile-action_like"
-          ref="like"
-          @click.native="setVote">
-          2
-        </v-btn>
-        <v-btn
-          fab
-          class="discover__profile-action
-          discover__profile-action_superlike
-          discover__profile-action_small"
-          ref="superLike"
-          @click.native="setVote">
-          3
-        </v-btn>
+        <div class="discover__profile-action
+                    discover__profile-action_dislike
+                    discover__profile-action_small"
+             ref="dislike"
+             @click="setVote(false)">
+          <v-icon size="21">$dislike</v-icon>
+        </div>
+        <div class="discover__profile-action
+                    discover__profile-action_like"
+             ref="like"
+             @click="setVote">
+          <v-icon size="36">$like</v-icon>
+        </div>
+        <div class="discover__profile-action
+                    discover__profile-action_superlike
+                    discover__profile-action_small"
+             ref="superLike"
+             @click="setVote">
+          <v-icon size="26">$superLike</v-icon>
+        </div>
       </div>
     </div>
     <v-dialog v-model="isProfileShown"
@@ -272,13 +266,8 @@ export default class DiscoverProfileComponent extends Vue {
         align-items: center;
         justify-content: center;
         box-shadow: 0 20px 45px var(--v-white-darken4) !important;
-
-        ::v-deep {
-          .v-btn__content {
-            transition: initial;
-            transition-property: initial;
-          }
-        }
+        border-radius: 50%;
+        background: var(--v-white-base);
 
         &_small {
           width: 3.875rem !important;
