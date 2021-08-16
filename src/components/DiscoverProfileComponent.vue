@@ -41,7 +41,7 @@
           discover__profile-action_small"
           ref="dislike"
           @click.native="setVote(false)">
-          <v-icon size="21">$dislike</v-icon>
+          1
         </v-btn>
         <v-btn
           fab
@@ -49,7 +49,7 @@
           discover__profile-action_like"
           ref="like"
           @click.native="setVote">
-          <v-icon size="36">$like</v-icon>
+          2
         </v-btn>
         <v-btn
           fab
@@ -58,7 +58,7 @@
           discover__profile-action_small"
           ref="superLike"
           @click.native="setVote">
-          <v-icon size="26">$superLike</v-icon>
+          3
         </v-btn>
       </div>
     </div>
@@ -157,36 +157,35 @@ export default class DiscoverProfileComponent extends Vue {
   mounted(): void {
     const discoverCard: HTMLElement = this.$refs?.discoverCard as HTMLElement;
     const { setMoving, setVote, setLike } = this;
-    const position = { x: 0, y: 0 };
+    let offsetX = 0;
 
     interact(discoverCard).draggable({
+      startAxis: 'x',
+      lockAxis: 'start',
       listeners: {
         start() {
           setMoving();
         },
         move(event) {
-          position.x += event.dx;
-          position.y += event.dy;
-          setLike(position.x > 0);
-          const xMulti: number = position.x * 0.03;
-          const yMulti: number = position.y / 80;
-          const rotate: number = xMulti * yMulti;
+          offsetX += event.dx;
+          setLike(offsetX > 0);
+          const offsetY: number = Math.abs(offsetX / 7);
+          const rotate: number = offsetX / 50;
 
-          discoverCard.style.transform = `translate(${position.x}px, ${position.y}px) rotate(${rotate}deg)`;
+          discoverCard.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotate}deg)`;
         },
         end(event) {
-          const keep: boolean = Math.abs(event.velocity.x) < 500;
+          const keep: boolean = Math.abs(event.velocity.x) < 1000;
           setMoving(false);
 
           if (keep) {
-            position.x = 0;
-            position.y = 0;
+            offsetX = 0;
             discoverCard.style.transform = '';
             setLike();
             return;
           }
 
-          setVote(position.x > 0);
+          setVote(offsetX > 0);
         },
       },
     });
