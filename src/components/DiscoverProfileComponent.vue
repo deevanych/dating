@@ -190,7 +190,6 @@ export default class DiscoverProfileComponent extends Vue {
       position: absolute;
       opacity: 0;
       transition: 0.3s;
-      will-change: opactiy;
     }
 
     &__gradient-helper {
@@ -206,7 +205,6 @@ export default class DiscoverProfileComponent extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
-      will-change: background;
 
       &__icon {
         width: 100%;
@@ -248,7 +246,6 @@ export default class DiscoverProfileComponent extends Vue {
       z-index: 97;
       touch-action: none;
       user-select: none;
-      will-change: transform;
 
       & * {
         user-select: none;
@@ -278,7 +275,6 @@ export default class DiscoverProfileComponent extends Vue {
         border-radius: 50%;
         background: var(--v-white-base);
         transition: 0.3s;
-        will-change: box-shadow;
         background-position: center;
         background-repeat: no-repeat;
         background-size: 36px;

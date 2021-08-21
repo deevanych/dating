@@ -4,8 +4,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/.htaccess"
   },
   {
-    "revision": "05057171c217f6543fa5",
-    "url": "assets/css/app.317961d5.css"
+    "revision": "bc988e6e9a5b86082ab0",
+    "url": "assets/css/app.155b21e9.css"
   },
   {
     "revision": "4965e77a1b0b236880ac",
@@ -88,7 +88,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/img/superlike.e87628d8.svg"
   },
   {
-    "revision": "ea21f0db492de5c5a2d051cf6376a124",
+    "revision": "608b0881ffb81c5d3bd6ce9db9d6c16e",
     "url": "assets/index.html"
   },
   {
@@ -96,8 +96,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/index.php"
   },
   {
-    "revision": "05057171c217f6543fa5",
-    "url": "assets/js/app.4b6506de.js"
+    "revision": "bc988e6e9a5b86082ab0",
+    "url": "assets/js/app.953532be.js"
   },
   {
     "revision": "4965e77a1b0b236880ac",
