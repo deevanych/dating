@@ -19,10 +19,7 @@
             'discover__gradient-helper_like': isLike,
             'discover__gradient-helper_dislike': isDislike,
             }">
-          <v-icon size="94"
-                  class="discover__icon discover__icon_like">$like</v-icon>
-          <v-icon size="94"
-                  class="discover__icon discover__icon_dislike">$dislike</v-icon>
+        <div class="discover__gradient-helper__icon"></div>
       </div>
       <div class="discover__profile-distance-wrapper">
         <v-icon size="12"
@@ -39,20 +36,17 @@
                     discover__profile-action_small"
              ref="dislike"
              @click="setVote(false)">
-          <v-icon size="21">$dislike</v-icon>
         </div>
         <div class="discover__profile-action
                     discover__profile-action_like"
              ref="like"
              @click="setVote">
-          <v-icon size="36">$like</v-icon>
         </div>
         <div class="discover__profile-action
                     discover__profile-action_superlike
                     discover__profile-action_small"
              ref="superLike"
              @click="setVote">
-          <v-icon size="26">$superLike</v-icon>
         </div>
       </div>
     </div>
@@ -200,6 +194,8 @@ export default class DiscoverProfileComponent extends Vue {
     }
 
     &__gradient-helper {
+      $gradientHelper: &;
+
       position: absolute;
       top: 0;
       left: 0;
@@ -212,10 +208,18 @@ export default class DiscoverProfileComponent extends Vue {
       align-items: center;
       will-change: background;
 
+      &__icon {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: 96px;
+      }
+
       &_like {
         background: linear-gradient(transparent, var(--v-pink-base));
 
-        & > #{$discover}__icon_like {
+        & > #{$gradientHelper}__icon {
+          background-image: url('~@/assets/icons/like.svg');
           opacity: 1;
         }
       }
@@ -223,7 +227,8 @@ export default class DiscoverProfileComponent extends Vue {
       &_dislike {
         background: linear-gradient(transparent, var(--v-red-base));
 
-        & > #{$discover}__icon_dislike {
+        & > #{$gradientHelper}__icon {
+          background-image: url('~@/assets/icons/dislike.svg');
           opacity: 1;
         }
       }
@@ -274,11 +279,28 @@ export default class DiscoverProfileComponent extends Vue {
         background: var(--v-white-base);
         transition: 0.3s;
         will-change: box-shadow;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 36px;
 
         &_small {
           width: 3.875rem !important;
           height: 3.875rem !important;
           margin-top: 0.5rem;
+          background-size: 26px;
+        }
+
+        &_like {
+          background-image: url('~@/assets/icons/like.svg');
+        }
+
+        &_dislike {
+          background-image: url('~@/assets/icons/dislike.svg');
+          background-size: 21px;
+        }
+
+        &_superlike {
+          background-image: url('~@/assets/icons/superlike.svg');
         }
       }
 
