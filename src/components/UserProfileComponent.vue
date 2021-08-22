@@ -1,7 +1,9 @@
 <template>
-  <div class="user-profile">
+  <div class="user-profile"
+       :class="{'user-profile_moving': isMoving}"
+       ref="userProfile">
     <div class="user-profile__close-button"
-         @click="$emit('close')">
+         @click="closeUserProfile">
       <v-icon size="24">$chevronLeft</v-icon>
     </div>
     <div class="user-profile__wrapper">
@@ -53,6 +55,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { UserType } from '@/models/User';
 import InterestComponent from '@/components/InterestComponent.vue';
+import interact from 'interactjs';
 
 @Component({
   components: {
@@ -62,6 +65,81 @@ import InterestComponent from '@/components/InterestComponent.vue';
 export default class UserProfileComponent extends Vue {
   @Prop({ required: true })
   private readonly user!: UserType
+
+  private readonly closeVelocity = 1000
+
+  private isMoving = false
+
+  private toggleTransitionClass(): void {
+    this.isMoving = !this.isMoving;
+  }
+
+  private closeUserProfile(velocityX = 0):void {
+    const userProfileElement: HTMLElement = this.$refs?.userProfile as HTMLElement;
+
+    if (velocityX > 0) {
+      userProfileElement.style.transform = 'translateX(100%)';
+
+      setTimeout(() => {
+        this.$emit('close');
+      }, 100);
+
+      return;
+    }
+
+    userProfileElement.style.transform = 'translateY(100%)';
+
+    setTimeout(() => {
+      this.$emit('close');
+    }, 100);
+  }
+
+  mounted(): void {
+    const userProfileElement: HTMLElement = this.$refs?.userProfile as HTMLElement;
+    const { closeUserProfile, closeVelocity, toggleTransitionClass } = this;
+    let offsetY = 0;
+    let offsetX = 0;
+
+    interact(userProfileElement).draggable({
+      startAxis: 'xy',
+      lockAxis: 'start',
+      listeners: {
+        start() {
+          offsetY = 0;
+          offsetX = 0;
+          toggleTransitionClass();
+        },
+        move(event) {
+          offsetY += event.dy;
+          offsetX += event.dx;
+
+          if (offsetY > 30) {
+            userProfileElement.style.transform = `translateY(${offsetY}px)`;
+            return;
+          }
+
+          if (offsetX > 0) {
+            userProfileElement.style.transform = `translateX(${offsetX}px)`;
+            return;
+          }
+
+          userProfileElement.style.transform = 'translate(0 0)';
+        },
+        end(event) {
+          const velocity = event.velocity.x + event.velocity.y;
+          const keep: boolean = velocity < closeVelocity;
+          toggleTransitionClass();
+
+          if (keep) {
+            userProfileElement.style.transform = 'translateY(0px)';
+            return;
+          }
+
+          closeUserProfile(event.velocity.x);
+        },
+      },
+    });
+  }
 }
 </script>
 
@@ -69,6 +147,13 @@ export default class UserProfileComponent extends Vue {
   .user-profile {
     background-color: var(--v-white-base);
     height: 100%;
+    touch-action: none;
+    user-select: none;
+    transition: 0.1s;
+
+    &_moving {
+      transition: 0s;
+    }
 
     &__wrapper {
       overflow: hidden;
@@ -148,6 +233,8 @@ export default class UserProfileComponent extends Vue {
       max-height: 60%;
       overflow: scroll;
       padding: 1.375rem 2.125rem;
+      touch-action: none;
+      user-select: none;
     }
 
     &__close-button {

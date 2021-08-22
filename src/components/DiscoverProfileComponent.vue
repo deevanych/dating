@@ -53,7 +53,8 @@
     <v-dialog v-model="isProfileShown"
               transition="dialog-bottom-transition"
               fullscreen>
-      <user-profile-component :user="profile"
+      <user-profile-component v-if="isProfileShown"
+                              :user="profile"
                               @close="isProfileShown = false"/>
     </v-dialog>
   </div>
@@ -182,6 +183,16 @@ export default class DiscoverProfileComponent extends Vue {
 </script>
 
 <style scoped lang="scss">
+  ::v-deep {
+    .v-dialog {
+      box-shadow: none;
+
+      &--fullscreen {
+        overflow-x: hidden;
+      }
+    }
+  }
+
   .discover {
     $discover: &;
 
