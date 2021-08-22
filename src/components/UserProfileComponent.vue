@@ -110,17 +110,26 @@ export default class UserProfileComponent extends Vue {
           toggleTransitionClass();
         },
         move(event) {
+          console.log(event);
           offsetY += event.dy;
           offsetX += event.dx;
 
-          if (offsetY > 30) {
-            userProfileElement.style.transform = `translateY(${offsetY}px)`;
-            return;
+          if (Math.abs(offsetY) > 0) {
+            if (offsetY > 0) {
+              userProfileElement.style.transform = `translateY(${offsetY}px)`;
+              return;
+            }
+
+            userProfileElement.style.transform = 'translateY(0px)';
           }
 
-          if (offsetX > 0) {
-            userProfileElement.style.transform = `translateX(${offsetX}px)`;
-            return;
+          if (Math.abs(offsetX) > 0) {
+            if (offsetX > 0) {
+              userProfileElement.style.transform = `translateX(${offsetX}px)`;
+              return;
+            }
+
+            userProfileElement.style.transform = 'translateX(0px)';
           }
 
           userProfileElement.style.transform = 'translate(0 0)';
