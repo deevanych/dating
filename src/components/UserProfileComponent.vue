@@ -110,7 +110,6 @@ export default class UserProfileComponent extends Vue {
           toggleTransitionClass();
         },
         move(event) {
-          console.log(event);
           offsetY += event.dy;
           offsetX += event.dx;
 

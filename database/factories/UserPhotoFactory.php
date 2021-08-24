@@ -23,7 +23,7 @@ class UserPhotoFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 50),
-            'url' => $this->faker->imageUrl('400', '600'),
+            'url' => 'https://placeimg.com/300/600/people?ver='.$this->faker->numberBetween(1, 50),
             'is_default' => $this->faker->boolean(),
         ];
     }
